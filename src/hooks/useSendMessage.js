@@ -10,7 +10,7 @@ const useSendMessage = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `/api/messages/send/${selectedConversation._id}`,
+        `https://chat-app-backend-wjsw.onrender.com/api/messages/send/${selectedConversation._id}`,
         {
           method: "POST",
           headers: {
