@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5000",
+        target: "https://chat-app-backend-wjsw.onrender.com",
         changeOrigin: true,
         secure: false,
       },
