@@ -3,8 +3,8 @@
 FROM node:18.18-alpine as build
 WORKDIR /app
 COPY . .
-RUN yarn
-RUN yarn build
+RUN npm install
+RUN npm run build
 
 ## run stage ##
 FROM nginx:alpine

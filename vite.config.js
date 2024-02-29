@@ -12,5 +12,9 @@ export default defineConfig({
         secure: false,
       },
     },
+    preview: {
+      host: true,
+      port: 3000,
+    },
   },
 });
