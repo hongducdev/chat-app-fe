@@ -5,16 +5,7 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   plugins: [react()],
   server: {
-    proxy: {
-      "/api": {
-        target: "https://chat-app-backend-wjsw.onrender.com",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-    preview: {
-      host: true,
-      port: 3000,
-    },
+    host: true,
+    port: 4953,
   },
 });
