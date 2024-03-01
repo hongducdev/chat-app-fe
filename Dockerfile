@@ -1,15 +1,11 @@
-# FROM node:18  as builder
-# WORKDIR /app
-# COPY package.json .
-# RUN npm install
-# COPY . .
-# RUN npm run build
-
-# Run without Nginx
-FROM node:18
+FROM node:18-alpine as build
 WORKDIR /app
-COPY package.json .
-RUN npm install
 COPY . .
+RUN npm install
 RUN npm run build
-CMD ["npm", "start"]
+
+## run stage ##
+FROM nginx:alpine
+RUN mkdir /app/dist
+COPY --from=build /app/dist /app/dist
+COPY nginx.conf /etc/nginx/nginx.conf
