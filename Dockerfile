@@ -1,6 +1,6 @@
 ##### Dockerfile #####
 ## build stage ##
-FROM node:18.18-alpine as build
+FROM node:18.18-alpine as builder
 WORKDIR /app
 COPY package.json .
 RUN npm install
