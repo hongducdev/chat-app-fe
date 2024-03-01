@@ -10,7 +10,13 @@ const useGetConversation = () => {
       setIsLoading(true);
       try {
         // Fetch conversation from the server
-        const response = await fetch("https://chat-app-backend-wjsw.onrender.com/api/users");
+        const response = await fetch("http://54.254.151.131:4090/api/users", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
         const data = await response.json();
         if (data.error) throw new Error(data.error);
         setConversation(data);

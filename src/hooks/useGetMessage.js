@@ -10,7 +10,7 @@ const useGetMessage = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `/api/messages/${selectedConversation._id}`
+          `http://54.254.151.131:4090/api/messages/${selectedConversation._id}`
         );
         const data = await response.json();
         if (data.error) throw new Error(data.error);
