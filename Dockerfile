@@ -6,6 +6,5 @@ RUN npm run build
 
 ## run stage ##
 FROM nginx:alpine
-RUN mkdir /app/dist
 COPY --from=build /app/dist /app/dist
 COPY nginx.conf /etc/nginx/nginx.conf
