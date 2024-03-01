@@ -1,11 +1,7 @@
 pipeline {
     agent any
     environment {
-        // Thiết lập các biến môi trường nếu cần
-        DOCKER_IMAGE_NAME = 'chat-app-reacjs'
         GITHUB_REPO_URL = 'https://github.com/hongducdev/chat-app-fe.git'
-        DOCKER_USER_NAME = 'hiuhuyn'
-        VERSION_NUMBER = '1.0.${BUILD_NUMBER}'
     }
 
     stages {
@@ -13,19 +9,9 @@ pipeline {
             steps {
                 deleteDir ()
                 script {
-                    def runningContainers = sh(script: 'docker ps -q', returnStdout: true).trim()
-                    if (runningContainers) {
-                        sh "docker stop $runningContainers"             
-                    } else {
-                        echo "Không có container đang chạy."
-                    }
-                    def container = sh(script: 'docker ps -a -q', returnStdout: true).trim()
-                    if(container){
-                        sh 'docker rm $(docker ps -a -q)'
-                    }else{
-                        echo "Không có container."
-                    }
-                  }
+                    sh 'docker-compose stop'
+                    sh 'docker-compose rm -f'
+                }
             }
         }
         stage ('Git Checkout') {
@@ -41,13 +27,7 @@ pipeline {
             steps{
                 dir('DevopsChatApp') {
                     script {
-                        sh "docker build -t ${DOCKER_IMAGE_NAME}:${VERSION_NUMBER} ." 
-                        sh "docker tag ${DOCKER_IMAGE_NAME}:${VERSION_NUMBER} ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION_NUMBER}"
-                        withCredentials([usernamePassword(credentialsId: 'my-docker-hub', usernameVariable: 'docker_user', passwordVariable: 'docker_pass')]) {
-                            sh "docker login -u '${docker_user}' -p '${docker_pass}'"
-                        }
-                        sh "docker push ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION_NUMBER}"
-                        sh "docker image prune -af"
+                        sh 'docker-compose build'
                     }
                 }
             }
@@ -55,7 +35,7 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                    sh "docker run -dp 4953:4953 ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION_NUMBER}"
+                    sh 'docker-compose up'
                 }
             }
         }
