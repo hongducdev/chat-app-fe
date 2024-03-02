@@ -1,6 +1,7 @@
-FROM node:16 as build
+FROM node:18 as build
 WORKDIR /app
 COPY package*.json ./
+RUN npm config set registry http://registry.npmjs.org/
 RUN npm install --verbose
 COPY . .
 RUN npm run build
