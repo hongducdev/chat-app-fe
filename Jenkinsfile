@@ -23,7 +23,7 @@ pipeline {
             steps{
                 dir('DevopsChatApp') {
                     script {
-                        sh 'docker-compose up -d'
+                        sh 'sudo docker-compose up -d'
                     }
                 }
             }
