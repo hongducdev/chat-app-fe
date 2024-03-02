@@ -4,6 +4,7 @@ COPY package*.json ./
 RUN npm cache clean --force 
 RUN npm install -g npm@latest 
 RUN npm config set registry https://registry.npmjs.org/
+RUN npm config set strict-ssl false
 RUN npm install --verbose
 COPY . .
 RUN npm run build
