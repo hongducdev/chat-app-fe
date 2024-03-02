@@ -19,19 +19,12 @@ pipeline {
                 }
             }
         }
-        stage('Docker Image Build') {
+        stage('Docker Image Build And Run') {
             steps{
                 dir('DevopsChatApp') {
                     script {
-                        sh 'docker-compose build'
+                        sh 'docker-compose up -d'
                     }
-                }
-            }
-        }
-        stage('Deploy'){
-            steps{
-                script{
-                    sh 'docker-compose up'
                 }
             }
         }
