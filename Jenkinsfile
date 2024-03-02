@@ -8,10 +8,6 @@ pipeline {
         stage("Cleanup") {
             steps {
                 deleteDir ()
-                script {
-                    sh 'docker-compose stop'
-                    sh 'docker-compose rm -f'
-                }
             }
         }
         stage ('Git Checkout') {
