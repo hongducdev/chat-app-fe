@@ -19,7 +19,7 @@ pipeline {
                 }
             }
         }
-        stage('Docker Image Build And Run') {
+        stage('Docker Build') {
             steps{
                 dir('DevopsChatApp') {
                     script {
@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         }
-        stage('Docker Container Run') {
+        stage('Docker Run') {
             steps{
                 dir('DevopsChatApp') {
                     script {
