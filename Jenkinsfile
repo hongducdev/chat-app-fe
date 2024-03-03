@@ -19,6 +19,11 @@ pipeline {
                 }
             }
         }
+         stage('Test Automation') {
+            steps{
+                echo 'Testing'
+            }
+        }
         stage('Docker Build') {
             steps{
                 dir('DevopsChatApp') {
