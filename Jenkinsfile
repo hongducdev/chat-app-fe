@@ -24,6 +24,14 @@ pipeline {
                 dir('DevopsChatApp') {
                     script {
                         sh 'sudo docker-compose build'
+                    }
+                }
+            }
+        }
+        stage('Docker Container Run') {
+            steps{
+                dir('DevopsChatApp') {
+                    script {
                         sh 'sudo docker-compose up -d'
                     }
                 }
