@@ -1,32 +1,42 @@
-import { useEffect, useState } from "react";
-import useConversation from "../store/useConversation";
+import { useEffect, useState } from 'react';
+import useConversation from '../store/useConversation';
 
 const useGetMessage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { messages, setMessages, selectedConversation } = useConversation();
+   const [isLoading, setIsLoading] = useState(false);
+   const { messages, setMessages, selectedConversation } = useConversation();
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(
-          `https://chatapp-be.datdev.id.vn/api/messages/${selectedConversation._id}`
-        );
-        const data = await response.json();
-        if (data.error) throw new Error(data.error);
+   useEffect(() => {
+      const fetchMessages = async () => {
+         setIsLoading(true);
+         try {
+            const response = await fetch(
+               `https://chatapp-be.datdev.id.vn/api/messages/${selectedConversation._id}`,
+               {
+                  method: 'GET',
+                  headers: {
+                     'Content-Type': 'application/json',
+                  },
+                  credentials: 'include',
+               }
+            );
 
-        setMessages(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+            const data = await response.json();
+            console.log('🚀 ~ fetchMessages ~ response:', response);
 
-    if (selectedConversation._id) fetchMessages();
-  }, [selectedConversation?._id, setMessages]);
+            if (data.error) throw new Error(data.error);
 
-  return { messages, isLoading };
+            setMessages(data);
+         } catch (error) {
+            console.error(error);
+         } finally {
+            setIsLoading(false);
+         }
+      };
+
+      if (selectedConversation._id) fetchMessages();
+   }, [selectedConversation?._id, setMessages]);
+
+   return { messages, isLoading };
 };
 
 export default useGetMessage;
