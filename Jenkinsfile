@@ -33,7 +33,7 @@ pipeline {
                 }
             }
         }
-        stage('Docker Run') {
+        stage('Deploy') {
             steps{
                 dir('DevopsChatApp') {
                     script {
