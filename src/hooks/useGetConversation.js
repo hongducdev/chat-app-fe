@@ -10,18 +10,24 @@ const useGetConversation = () => {
     const fetchConversation = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(
-          "https://chatapp-be.datdev.id.vn/api/users",
-          {
-            withCredentials: true,
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-            },
-          }
-        );
+      //   await axios.get(
+      //     "https://chatapp-be.datdev.id.vn/api/users",
+      //     {
+      //       withCredentials: true,
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //     }
+      //   );
+        const response = await fetch("https://chatapp-be.datdev.id.vn/api/users", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
 
-        const data = response.data;
+        const data = await response.json();
 
         // const chatUserStr = localStorage.getItem("chat-user");
         // const chatUser = JSON.parse(chatUserStr);
