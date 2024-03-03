@@ -13,7 +13,7 @@ const useLogin = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://54.254.151.131:4090/api/auth/login",
+        "https://chatapp-be.datdev.id.vn/api/auth/login",
         {
           username,
           password,

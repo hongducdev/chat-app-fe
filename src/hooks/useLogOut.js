@@ -9,10 +9,13 @@ const useLogout = () => {
   const logout = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://54.254.151.131:4090/api/users/logout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
+      const res = await fetch(
+        "https://chatapp-be.datdev.id.vn/api/users/logout",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       const data = await res.json();
       if (data.error) {
         throw new Error(data.error);

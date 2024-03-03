@@ -18,7 +18,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (authUser) {
-      const socket = io("http://54.254.151.131:4090/", {
+      const socket = io("https://chatapp-be.datdev.id.vn/", {
         query: {
           userId: authUser._id,
         },

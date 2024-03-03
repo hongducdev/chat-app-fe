@@ -11,7 +11,7 @@ const useGetConversation = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          "http://54.254.151.131:4090/api/users",
+          "https://chatapp-be.datdev.id.vn/api/users",
           {
             withCredentials: true,
             headers: {
@@ -30,7 +30,7 @@ const useGetConversation = () => {
 
         // if (response.status === 401) {
         //   const res = await fetch(
-        //     `http://54.254.151.131:4090/test/api/users?_id=${userId}`,
+        //     `https://chatapp-be.datdev.id.vn/test/api/users?_id=${userId}`,
         //     {
         //       method: "GET",
         //       headers: {

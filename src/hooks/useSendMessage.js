@@ -10,7 +10,7 @@ const useSendMessage = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `http://54.254.151.131:4090/api/messages/send/${selectedConversation._id}`,
+        `https://chatapp-be.datdev.id.vn/api/messages/send/${selectedConversation._id}`,
         {
           method: "POST",
           headers: {

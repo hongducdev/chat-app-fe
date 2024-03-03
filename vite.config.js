@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   proxy: {
     "/api": {
-      target: "http://54.254.151.131:4090",
+      target: "https://chatapp-be.datdev.id.vn",
     },
   },
 });

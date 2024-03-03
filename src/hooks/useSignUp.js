@@ -24,18 +24,21 @@ const useSignup = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://54.254.151.131:4090/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName,
-          username,
-          password,
-          confirmPassword,
-          gender,
-        }),
-        credentials: "include",
-      });
+      const res = await fetch(
+        "https://chatapp-be.datdev.id.vn/api/auth/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fullName,
+            username,
+            password,
+            confirmPassword,
+            gender,
+          }),
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
       if (data.error) {
