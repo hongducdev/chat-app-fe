@@ -16,6 +16,7 @@ const useSendMessage = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials: true,
           body: JSON.stringify(message),
         }
       );
