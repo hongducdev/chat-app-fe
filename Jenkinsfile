@@ -64,11 +64,11 @@ pipeline {
     post {
         success {
             // Các bước sau khi build thành công
-            echo 'Test and build and push Docker image successfully.'
+            echo 'Quá trình hoàn tất.'
         }
         failure {
             // Các bước sau khi build thất bại
-            echo 'Test or build or push Docker image failed.'
+            echo 'Quá trình thất bại'
         }
     }
 }
