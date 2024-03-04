@@ -30,6 +30,16 @@ pipeline {
                 }
             }
         }
+        // Testing system
+        stage('Testing') {
+            steps{
+                dir('DevopsChatApp') {
+                    script {
+                        echo 'Testing... be continued...'
+                    }
+                }
+            }
+        }
         // Xây dựng docker từ src code với các câu lệnh từ Dockerfile
         stage('Docker Build') {
             steps{
@@ -50,25 +60,15 @@ pipeline {
                 }
             }
         }
-        // Testing
-        stage('Testing') {
-            steps{
-                dir('DevopsChatApp') {
-                    script {
-                        echo 'Testing... be continued...'
-                    }
-                }
-            }
-        }
     }
     post {
         success {
             // Các bước sau khi build thành công
-            echo 'Build and push Docker image successfully.'
+            echo 'Tesing and building and pushing Docker image successfully.'
         }
         failure {
             // Các bước sau khi build thất bại
-            echo 'Build and push Docker image failed.'
+            echo 'Testing or building or pushing Docker image failed.'
         }
     }
 }
