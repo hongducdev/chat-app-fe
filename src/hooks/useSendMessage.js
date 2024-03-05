@@ -1,37 +1,37 @@
-import { useState } from "react";
-import useConversation from "../store/useConversation";
-import toast from "react-hot-toast";
+import { useState } from 'react';
+import useConversation from '../store/useConversation';
+import toast from 'react-hot-toast';
 
 const useSendMessage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { messages, setMessages, selectedConversation } = useConversation();
+   const [isLoading, setIsLoading] = useState(false);
+   const { messages, setMessages, selectedConversation } = useConversation();
 
-  const sendMessage = async (message) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `https://chatapp-be.datdev.id.vn/api/messages/send/${selectedConversation._id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-          body: JSON.stringify(message),
-        }
-      );
-      const data = await response.json();
-      if (data.error) throw new Error(data.error);
+   const sendMessage = async (message) => {
+      setIsLoading(true);
+      try {
+         const response = await fetch(
+            `https://chatapp-be.datdev.id.vn/api/messages/send/${selectedConversation._id}`,
+            {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               credentials: 'include',
+               body: JSON.stringify(message),
+            }
+         );
+         const data = await response.json();
+         if (data.error) throw new Error(data.error);
 
-      setMessages([...messages, data]);
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+         setMessages([...messages, data]);
+      } catch (error) {
+         toast.error(error.message);
+      } finally {
+         setIsLoading(false);
+      }
+   };
 
-  return { sendMessage, isLoading };
+   return { sendMessage, isLoading };
 };
 
 export default useSendMessage;
