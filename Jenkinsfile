@@ -40,7 +40,7 @@ pipeline {
             steps {
                 dir('DevopsChatApp') {
                     script {
-                        sh 'sudo docker-compose build -t ${DOCKER_IMAGE_NAME}:${VERSION} .'
+                        sh 'sudo docker-compose build -t ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION} .'
                         sh 'sudo docker-compose push ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
                     }
                 }
