@@ -40,8 +40,8 @@ pipeline {
             steps {
                 dir('DevopsChatApp') {
                     script {
-                        sh 'sudo docker-compose build -t ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION} .'
-                        sh 'sudo docker-compose push ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
+                        sh 'sudo docker build -t ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION} .'
+                        sh 'sudo docker push ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
                     }
                 }
             }
@@ -52,9 +52,7 @@ pipeline {
         stage('Docker Run') {
             steps {
                 script {
-                    sh 'sudo docker-compose down'
-                    sh 'sudo docker-compose pull'
-                    sh 'sudo docker-compose up -d'
+                    sh 'sudo docker run -dp 5173:80 ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
                 }
             }
         }
