@@ -4,7 +4,7 @@ pipeline {
         GITHUB_REPO_URL = 'https://github.com/hongducdev/chat-app-fe.git'
         DOCKER_IMAGE_NAME = 'chat-app-fe'
         DOCKER_USER_NAME = 'hongducdev'
-        DOCKER_HUB_CREDENTIALS = credentials('hongducdev-chatapp')
+        DOCKER_HUB_PASSWORD = 'HongDuc051002@'
         VERSION = '1.0.${BUILD_NUMBER}'
     }
 
@@ -13,19 +13,7 @@ pipeline {
             steps {
                 deleteDir()
                 script {
-                    def runningContainers = sh(script: 'sudo docker-compose ps -q', returnStdout: true).trim()
-                    if (runningContainers) {
-                        sh 'sudo docker-compose stop ${runningContainers}'
-                    } else {
-                        echo 'No running containers'
-                    }
-
-                    def containers = sh(script: 'sudo docker-compose ps -aq', returnStdout: true).trim()
-                    if (containers) {
-                        sh 'sudo docker-compose rm -f ${containers}'
-                    } else {
-                        echo 'No containers'
-                    }
+                    sh 'sudo docker system prune -af'
                 }
             }
         }
@@ -40,27 +28,27 @@ pipeline {
             }
         }
 
+        stage('Docker Login and Push') {
+            steps {
+                script {
+                    sh 'sudo docker login -u ${DOCKER_USER_NAME} -p ${DOCKER_HUB_PASSWORD}'
+                }
+            }
+        }
+
         stage('Docker Build') {
             steps {
                 dir('DevopsChatApp') {
                     script {
                         sh 'sudo docker-compose build -t ${DOCKER_IMAGE_NAME}:${VERSION} .'
                         sh 'sudo docker-compose tag ${DOCKER_IMAGE_NAME}:${VERSION} ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
-                    }
-                }
-            }
-        }
-
-        stage('Docker Login and Push') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
-                        sh 'sudo docker login -u $DOCKER_USER_NAME --password-stdin <<< $DOCKER_HUB_CREDENTIALS_PSW'
                         sh 'sudo docker-compose push ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
                     }
                 }
             }
         }
+
+        
 
         stage('Docker Run') {
             steps {
