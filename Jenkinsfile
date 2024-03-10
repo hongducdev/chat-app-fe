@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE_NAME = 'chat-app-fe'
         DOCKER_USER_NAME = 'hongducdev'
         DOCKER_HUB_PASSWORD = 'HongDuc051002@'
-        VERSION = '1.0.${BUILD_NUMBER}'
+        VERSION = "1.0.${BUILD_NUMBER}"
     }
 
     stages {
