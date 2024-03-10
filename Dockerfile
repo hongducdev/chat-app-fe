@@ -10,7 +10,7 @@ COPY . .
 RUN npm run build
 
 ## run stage ##
-FROM nginx:alpine
+FROM nginx
 COPY --from=build /app/dist /app/dist
 COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
