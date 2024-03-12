@@ -17,6 +17,8 @@ const MessageInput = () => {
     <form className="px-4 my-3 flex items-center gap-3" onSubmit={handleSubmit}>
       <input
         type="text"
+        name="message"
+        id="message"
         className="input input-bordered rounded-full flex-1 bg-ctp-mantle"
         placeholder="Type a message..."
         value={message}

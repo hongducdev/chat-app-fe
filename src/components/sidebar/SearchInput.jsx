@@ -32,6 +32,8 @@ const SearchInput = () => {
     <form className="flex items-center gap-3" onSubmit={handleSearch}>
       <input
         type="text"
+        name="search"
+        id="search"
         placeholder="Search for a user"
         className="input input-bordered rounded-full bg-ctp-mantle"
         value={search}
