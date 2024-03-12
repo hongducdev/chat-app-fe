@@ -31,7 +31,7 @@ const Login = () => {
               id="username"
               type="text"
               placeholder="Enter your username"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-ctp-base text-ctp-text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -44,13 +44,13 @@ const Login = () => {
               id="password"
               type="password"
               placeholder="Enter your password"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-ctp-base text-ctp-text"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <button
-            className="btn bg-gradient-to-r from-ctp-pink to-ctp-mauve w-full mt-5 text-ctp-base text-xl"
+            className="btn bg-gradient-to-r from-ctp-pink to-ctp-mauve w-full mt-5 text-ctp-base text-xl border-none outline-none focus:outline-none"
             disabled={isLoading}
           >
             {isLoading ? (

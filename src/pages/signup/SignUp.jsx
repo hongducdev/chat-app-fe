@@ -44,7 +44,7 @@ const SignUp = () => {
               type="text"
               name="fullName"
               placeholder="Enter your full name"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-ctp-base text-ctp-text"
               value={formData.fullName}
               onChange={handleChange}
             />
@@ -58,7 +58,7 @@ const SignUp = () => {
               type="text"
               name="username"
               placeholder="Enter your username"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-ctp-base text-ctp-text"
               value={formData.username}
               onChange={handleChange}
             />
@@ -72,7 +72,7 @@ const SignUp = () => {
               type="password"
               name="password"
               placeholder="Enter your password"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-ctp-base text-ctp-text"
               value={formData.password}
               onChange={handleChange}
             />
@@ -86,7 +86,7 @@ const SignUp = () => {
               type="password"
               name="confirmPassword"
               placeholder="Enter your password again"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-ctp-base text-ctp-text"
               value={formData.confirmPassword}
               onChange={handleChange}
             />
@@ -118,7 +118,7 @@ const SignUp = () => {
             </div>
           </div>
           <button
-            className="btn bg-gradient-to-r from-ctp-pink to-ctp-mauve w-full mt-5 text-ctp-base text-xl"
+            className="btn bg-gradient-to-r from-ctp-pink to-ctp-mauve w-full mt-5 text-ctp-base text-xl border-none outline-none focus:outline-none"
             disabled={isLoading}
           >
             {isLoading ? (

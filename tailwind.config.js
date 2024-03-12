@@ -9,7 +9,7 @@ export default {
     require("daisyui"),
     require("@catppuccin/tailwindcss")({
       prefix: "ctp",
-      defaultFlavour: "mocha",
+      defaultFlavour: "latte",
     }),
   ],
 };
