@@ -29,6 +29,7 @@ const Login = () => {
             </label>
             <input
               id="username"
+              name="username"
               type="text"
               placeholder="Enter your username"
               className="input input-bordered w-full bg-ctp-base text-ctp-text"
@@ -42,6 +43,7 @@ const Login = () => {
             </label>
             <input
               id="password"
+              name="password"
               type="password"
               placeholder="Enter your password"
               className="input input-bordered w-full bg-ctp-base text-ctp-text"
