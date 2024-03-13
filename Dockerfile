@@ -15,12 +15,12 @@
 # Start Nginx when the container runs
 # CMD ["nginx", "-g", "daemon off;"]
 
-FROM node:18 as build
+FROM oven/bun:1 as base
 WORKDIR /app
 COPY package*.json ./
 RUN bun install
 COPY . .
-RUN bun build
+RUN bun run build
 
 FROM nginx
 COPY --from=build /app/dist /usr/share/nginx/html
