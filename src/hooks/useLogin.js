@@ -12,16 +12,6 @@ const useLogin = () => {
       if (!success) return;
       setLoading(true);
       try {
-         // await axios.post(
-         //   "https://chatapp-be.datdev.id.vn/api/auth/login",
-         //   {
-         //     username,
-         //     password,
-         //   },
-         //   {
-         //     withCredentials: true,
-         //   }
-         // );
          const res = await fetch(
             'https://chatapp-be.datdev.id.vn/api/auth/login',
             {
