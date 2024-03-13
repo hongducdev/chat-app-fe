@@ -31,7 +31,7 @@ pipeline {
                   sh 'sudo docker rm $(docker ps -aq) || true'
                   sh 'sudo docker rmi $(docker images -q) || true'
                   sh 'docker build -t $DOCKER_IMAGE_NAME .'
-                  sh 'docker run -dp 5173:80 $DOCKER_IMAGE_NAME'
+                  sh 'docker run -dp 4953:80 $DOCKER_IMAGE_NAME'
                }
             }
          }
@@ -56,5 +56,6 @@ pipeline {
             }
          }
       }
+
    }
 }
