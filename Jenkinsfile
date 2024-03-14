@@ -12,7 +12,6 @@ pipeline {
             deleteDir()
             dir('DevopsChatApp') {
                script {
-                  // env.BRANCH_NAME = env.GIT_BRANCH.substring(env.GIT_BRANCH.lastIndexOf('/') + 1)
                   git branch: env.BRANCH_NAME, url: env.GITHUB_REPO_URL
                }
             }
@@ -27,9 +26,9 @@ pipeline {
                script {
                   echo("Code pushed or merged in branch ${env.BRANCH_NAME}")
                   sh 'sudo docker system prune -af'
-                  sh 'sudo docker stop $(docker ps --filter status=running || exists -q) || true'
-                  sh 'sudo docker rm $(docker ps -aq) || true'
-                  sh 'sudo docker rmi $(docker images -q) || true'
+                  sh 'sudo docker stop $(docker ps --filter publish=4953 -q) || true'
+                  sh 'sudo docker rm $(docker ps --filter publish=4953 -q) || true'
+                  sh 'sudo docker rmi $(docker images --filter reference=chat-app-fe* -q) || true'
                   sh 'docker build -t $DOCKER_IMAGE_NAME .'
                   sh 'docker run -dp 4953:80 $DOCKER_IMAGE_NAME'
                }
@@ -45,9 +44,9 @@ pipeline {
                script {
                   echo("Code pushed or merged in branch ${env.BRANCH_NAME}")
                   sh 'sudo docker system prune -af'
-                  sh 'sudo docker stop $(docker ps --filter status=running || exists -q) || true'
-                  sh 'sudo docker rm $(docker ps -aq) || true'
-                  sh 'sudo docker rmi $(docker images -q) || true'
+                  sh 'sudo docker stop $(docker ps --filter publish=5173 -q) || true'
+                  sh 'sudo docker rm $(docker ps --filter publish=5173 -q) || true'
+                  sh 'sudo docker rmi $(docker images --filter reference=chat-app-fe* -q) || true'
                   sh 'sudo docker login -u ${DOCKER_USER_NAME} -p ${DOCKER_HUB_PASSWORD}'
                   sh 'cp ../../.env .'
                   sh 'sudo docker build -t ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION} .'
