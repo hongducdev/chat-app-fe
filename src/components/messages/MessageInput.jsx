@@ -24,7 +24,12 @@ const MessageInput = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button className="h-12 w-12 rounded-full bg-gradient-to-r from-ctp-pink to-ctp-mauve text-ctp-base flex items-center justify-center">
+      <button
+        type="submit"
+        id="send"
+        disabled={isLoading}
+        className="h-12 w-12 rounded-full bg-gradient-to-r from-ctp-pink to-ctp-mauve text-ctp-base flex items-center justify-center"
+      >
         {isLoading ? (
           <div className="loading loading-spinner loading-sm"></div>
         ) : (

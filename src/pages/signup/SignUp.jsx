@@ -118,6 +118,8 @@ const SignUp = () => {
             </div>
           </div>
           <button
+            type="submit"
+            id="signup"
             className="btn bg-gradient-to-r from-ctp-pink to-ctp-mauve w-full mt-5 text-ctp-base text-xl border-none outline-none focus:outline-none"
             disabled={isLoading}
           >

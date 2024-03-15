@@ -39,7 +39,11 @@ const SearchInput = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button className="h-12 w-12 rounded-full bg-gradient-to-r from-ctp-pink to-ctp-mauve text-ctp-base flex items-center justify-center">
+      <button
+        type="submit"
+        id="search"
+        className="h-12 w-12 rounded-full bg-gradient-to-r from-ctp-pink to-ctp-mauve text-ctp-base flex items-center justify-center"
+      >
         <RiSearch2Line className="w-6 h-6" />
       </button>
     </form>
