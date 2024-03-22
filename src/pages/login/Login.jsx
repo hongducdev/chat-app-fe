@@ -52,6 +52,8 @@ const Login = () => {
             />
           </div>
           <button
+            type="submit"
+            id="login"
             className="btn bg-gradient-to-r from-ctp-pink to-ctp-mauve w-full mt-5 text-ctp-base text-xl border-none outline-none focus:outline-none"
             disabled={isLoading}
           >
