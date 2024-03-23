@@ -1,7 +1,7 @@
 pipeline {
    agent any
    environment {
-      GITHUB_REPO_URL = 'https://github.com/hongducdev/chat-app-fe.git'
+      GITHUB_REPO_URL = 'https://github.com/d4Jt/Chat-App-FE.git'
       DOCKER_IMAGE_NAME = 'chat-app-fe'
       VERSION = "1.0.${BUILD_NUMBER}"
       BRANCH_NAME = "${GIT_BRANCH.substring(GIT_BRANCH.lastIndexOf('/') + 1)}"
