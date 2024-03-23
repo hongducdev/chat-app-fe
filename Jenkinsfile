@@ -50,7 +50,7 @@ pipeline {
                   dir('DevopsChatApp') {
                      script {
                         sh 'sudo cp ../../test_server.pem ./test_server.pem'
-                        sh 'sudo ssh -i "./test_server.pem" root@13.250.96.47 "bash command.sh run"'
+                        sh 'sudo ssh -i "./test_server.pem" root@18.136.43.101 "bash command.sh run"'
                      }
                   }
                }
