@@ -21,16 +21,37 @@ pipeline {
          when {
             branch 'develop'
          }
-         steps {
-            dir('DevopsChatApp') {
-               script {
-                  echo("Code pushed or merged in branch ${env.BRANCH_NAME}")
-                  sh 'sudo docker system prune -af'
-                  sh 'sudo docker stop $(docker ps --filter publish=4953 -q) || true'
-                  sh 'sudo docker rm $(docker ps --filter publish=4953 -q) || true'
-                  sh 'sudo docker rmi $(docker images --filter reference=chat-app-fe* -q) || true'
-                  sh 'docker build -t $DOCKER_IMAGE_NAME .'
-                  sh 'docker run -dp 4953:80 $DOCKER_IMAGE_NAME'
+         stages {
+            stage('Clean up') {
+               steps {
+                  dir('DevopsChatApp') {
+                     script {
+                        echo("Code pushed or merged in branch ${env.BRANCH_NAME}")
+                        sh 'sudo docker system prune -af'
+                        sh 'sudo docker stop $(docker ps --filter publish=4953 -q) || true'
+                        sh 'sudo docker rm $(docker ps --filter publish=4953 -q) || true'
+                        sh 'sudo docker rmi $(docker images --filter reference=chat-app-fe* -q) || true'
+                     }
+                  }
+               }
+            }
+            stage('Build and run') {
+               steps {
+                  dir('DevopsChatApp') {
+                     script {
+                        sh 'docker build -t $DOCKER_IMAGE_NAME .'
+                        sh 'docker run -dp 4953:80 $DOCKER_IMAGE_NAME'
+                     }
+                  }
+               }
+            }
+            stage('Test automation') {
+               steps {
+                  dir('DevopsChatApp') {
+                     script {
+                        sh 'ssh root@18.136.43.101 "bash command.sh run"'
+                     }
+                  }
                }
             }
          }
@@ -39,20 +60,32 @@ pipeline {
          when {
             branch 'main'
          }
-         steps {
-            dir('DevopsChatApp') {
-               script {
-                  echo("Code pushed or merged in branch ${env.BRANCH_NAME}")
-                  sh 'sudo docker system prune -af'
-                  sh 'sudo docker stop $(docker ps --filter publish=5173 -q) || true'
-                  sh 'sudo docker rm $(docker ps --filter publish=5173 -q) || true'
-                  sh 'sudo docker rmi $(docker images --filter reference=chat-app-fe* -q) || true'
-                  sh 'sudo docker login -u ${DOCKER_USER_NAME} -p ${DOCKER_HUB_PASSWORD}'
-                  sh 'cp ../../.env .'
-                  sh 'sudo docker build -t ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION} .'
-                  sh 'sudo docker push ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
-                  sh 'sudo docker run -dp 5173:80 ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
-                  sh 'docker logout'
+         stages {
+            stage('Clean up') {
+               steps {
+                  dir('DevopsChatApp') {
+                     script {
+                        echo("Code pushed or merged in branch ${env.BRANCH_NAME}")
+                        sh 'sudo docker system prune -af'
+                        sh 'sudo docker stop $(docker ps --filter publish=5173 -q) || true'
+                        sh 'sudo docker rm $(docker ps --filter publish=5173 -q) || true'
+                        sh 'sudo docker rmi $(docker images --filter reference=chat-app-fe* -q) || true'
+                     }
+                  }
+               }
+            }
+            stage('Build and run') {
+               steps {
+                  dir('DevopsChatApp') {
+                     script {
+                        sh 'sudo docker login -u ${DOCKER_USER_NAME} -p ${DOCKER_HUB_PASSWORD}'
+                        sh 'cp ../../.env .'
+                        sh 'sudo docker build -t ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION} .'
+                        sh 'sudo docker push ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
+                        sh 'sudo docker run -dp 5173:80 ${DOCKER_USER_NAME}/${DOCKER_IMAGE_NAME}:${VERSION}'
+                        sh 'docker logout'
+                     }
+                  }
                }
             }
          }
