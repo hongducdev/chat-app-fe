@@ -49,7 +49,7 @@ pipeline {
                steps {
                   dir('DevopsChatApp') {
                      script {
-                        sh 'ssh root@18.136.43.101 "bash command.sh run"'
+                        sh 'ssh ubuntu@122.248.203.166 "bash command.sh test"'
                      }
                   }
                }
