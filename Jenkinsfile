@@ -22,7 +22,6 @@ pipeline {
             branch 'develop'
          }
          stages {
-           
             stage('Test automation') {
                steps {
                   dir('DevopsChatApp') {
