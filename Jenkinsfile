@@ -22,7 +22,7 @@ pipeline {
             branch 'develop'
          }
          stages {
-             stage('Clean up') {
+            stage('Clean up') {
                steps {
                   dir('DevopsChatApp') {
                      script {
@@ -49,7 +49,7 @@ pipeline {
                steps {
                   dir('DevopsChatApp') {
                      script {
-                        sh 'ssh root@122.248.203.166 "bash command.sh test-login"'
+                        sh 'ssh root@122.248.203.166 "bash command.sh test"'
                      }
                   }
                }
